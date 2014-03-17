@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CubeMappingGL
-  m_Shader: {fileID: 4800000, guid: a3c7890bf252f44c6b7b087c84182dbc, type: 3}
+  m_Name: FresnelGL
+  m_Shader: {fileID: 4800000, guid: 1bdfca985fd7248daaa8ed4fb2e215bb, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -29,6 +29,14 @@ Material:
         first:
           name: _MixRatio
         second: 1
+      data:
+        first:
+          name: _FresnelScale
+        second: 0
+      data:
+        first:
+          name: _FresnelExponent
+        second: 2.76830363
     m_Colors:
       data:
         first:
@@ -41,4 +49,4 @@ Material:
       data:
         first:
           name: _AmbientColor
-        second: {r: 0, g: 0, b: 0, a: 0}
+        second: {r: .161764681, g: .161764681, b: .161764681, a: 0}
