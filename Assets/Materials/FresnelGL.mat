@@ -24,7 +24,7 @@ Material:
       data:
         first:
           name: _SpecularPower
-        second: 19.4285717
+        second: 3.42857289
       data:
         first:
           name: _MixRatio
@@ -41,12 +41,12 @@ Material:
       data:
         first:
           name: _DiffuseColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .191176474, g: .191176474, b: .191176474, a: 1}
       data:
         first:
           name: _SpecularColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .102941155, g: .102941155, b: .102941155, a: 1}
       data:
         first:
           name: _AmbientColor
-        second: {r: .161764681, g: .161764681, b: .161764681, a: 0}
+        second: {r: .250980407, g: .250980407, b: .250980407, a: 0}

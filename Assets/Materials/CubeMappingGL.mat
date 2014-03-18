@@ -24,11 +24,11 @@ Material:
       data:
         first:
           name: _SpecularPower
-        second: 19.4285717
+        second: 13.7142859
       data:
         first:
           name: _MixRatio
-        second: 1
+        second: .5
     m_Colors:
       data:
         first:
