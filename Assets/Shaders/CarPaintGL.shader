@@ -1,14 +1,16 @@
 ﻿Shader "ShaderMan/CarPaintGL" {
 	Properties 
 	{
+		// Add for phong shader
 		_DiffuseColor ("Diffuse Color", Color) = (1, 1, 1, 1)
 		_SpecularColor ("Specular Color", Color) = (1, 1, 1, 1)
 		_SpecularPower ("Specular Power", Range (0.0, 64.0)) = 16.0
 		_AmbientColor ("Ambient Color", Color) = (0, 0, 0, 0)
 		
-		// Add for CubeMapping
+		// Add for cube mapping
 		_EnvironmentMap ("Environment Map", CUBE) = "" {}
 		_MixRatio ("Mix Ratio", Range (0.0, 1.0)) = 0.5
+		_Brightness ("Brightness", Range (0.0, 5.0)) = 1.0
 		
 		// Add for fresnel
 		_FresnelScale ("Fresnel Scale", Range (0.0, 1.0)) = 0.1
@@ -45,6 +47,7 @@
 			uniform vec4 _AmbientColor;
 			uniform samplerCube _EnvironmentMap;
 			uniform float _MixRatio;
+			uniform float _Brightness;
 			uniform float _FresnelScale;
 			uniform float _FresnelExponent;
 			uniform sampler2D _NormalMap;
@@ -177,6 +180,7 @@
 				// Look up environment map value in cube map
 				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
 				vec4 environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
+				environmentColor *= _Brightness;
 
 				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
 			    float fresnelMin = _FresnelScale * _MixRatio;
@@ -211,6 +215,7 @@
 			uniform vec4 _AmbientColor;
 			uniform samplerCube _EnvironmentMap;
 			uniform float _MixRatio;
+			uniform float _Brightness;
 			uniform float _FresnelScale;
 			uniform float _FresnelExponent;
 			uniform sampler2D _NormalMap;
@@ -343,6 +348,7 @@
 				// Look up environment map value in cube map
 				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
 				vec4 environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
+				environmentColor *= _Brightness;
 
 				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
 			    float fresnelMin = _FresnelScale * _MixRatio;

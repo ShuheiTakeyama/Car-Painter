@@ -39,13 +39,13 @@ Material:
           name: _FlakesNormalMap
         second:
           m_Texture: {fileID: 2800000, guid: 149caf300598c4abda114f8f5c39d21b, type: 3}
-          m_Scale: {x: 50, y: 50}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _SpecularPower
-        second: 58.2857132
+        second: 64
       data:
         first:
           name: _MixRatio
@@ -53,11 +53,11 @@ Material:
       data:
         first:
           name: _FresnelScale
-        second: .100000001
+        second: .0892857164
       data:
         first:
           name: _FresnelExponent
-        second: 3.48244643
+        second: 3.30391073
       data:
         first:
           name: _FlakesPerturbation1
@@ -65,11 +65,19 @@ Material:
       data:
         first:
           name: _NormalPerturbation
-        second: 1
+        second: .875
       data:
         first:
           name: _FlakesPerturbation2
         second: 1
+      data:
+        first:
+          name: _Brightness
+        second: 1.71428585
+      data:
+        first:
+          name: _FlakesPower
+        second: 11.4285727
     m_Colors:
       data:
         first:
@@ -78,11 +86,11 @@ Material:
       data:
         first:
           name: _DiffuseColor
-        second: {r: .691176474, g: .691176474, b: .691176474, a: 1}
+        second: {r: .389705896, g: .389705896, b: .389705896, a: 1}
       data:
         first:
           name: _SpecularColor
-        second: {r: .316176474, g: .316176474, b: .316176474, a: 1}
+        second: {r: .0808823705, g: .0808823705, b: .0808823705, a: 1}
       data:
         first:
           name: _AmbientColor
@@ -94,7 +102,7 @@ Material:
       data:
         first:
           name: _PaintColor2
-        second: {r: 1, g: .348478705, b: 0, a: 1}
+        second: {r: 1, g: .472616613, b: 0, a: 1}
       data:
         first:
           name: _PaintColor3
@@ -106,4 +114,4 @@ Material:
       data:
         first:
           name: _FlakesColor
-        second: {r: .38182351, g: .189770758, b: .661764741, a: 1}
+        second: {r: .572413921, g: 0, b: 1, a: 1}
