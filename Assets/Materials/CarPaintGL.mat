@@ -41,6 +41,13 @@ Material:
           m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
           m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AmbientOcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -61,11 +68,11 @@ Material:
       data:
         first:
           name: _FlakesPerturbation1
-        second: .0714285746
+        second: .5
       data:
         first:
           name: _NormalPerturbation
-        second: .875
+        second: .892857134
       data:
         first:
           name: _FlakesPerturbation2
@@ -102,11 +109,11 @@ Material:
       data:
         first:
           name: _PaintColor2
-        second: {r: 1, g: .472616613, b: 0, a: 1}
+        second: {r: 1, g: .0588235296, b: 0, a: 1}
       data:
         first:
           name: _PaintColor3
-        second: {r: 1, g: .687897265, b: 0, a: 1}
+        second: {r: 1, g: .8482759, b: 0, a: 1}
       data:
         first:
           name: _FlakeColor
@@ -114,4 +121,4 @@ Material:
       data:
         first:
           name: _FlakesColor
-        second: {r: .572413921, g: 0, b: 1, a: 1}
+        second: {r: .395639032, g: 0, b: .691176474, a: 1}
