@@ -28,6 +28,9 @@
 		_FlakesPerturbation1 ("Flakes Perturbation 1", Range (0.0, 1.0)) = 0.2
 		_NormalPerturbation ("Normal Perturbation", Range (0.0, 1.0)) = 1.0
 		_FlakesPerturbation2 ("Flakes Perturbation 2", Range (0.0, 1.0)) = 1.0
+		
+		// Add for ambient occlusion
+		_AmbientOcclusionMap ("Ambient Occlusion Map", 2D) = "white" {}		
 	}
 	
 	SubShader 
@@ -61,6 +64,7 @@
 			uniform float _FlakesPerturbation1;
 			uniform float _NormalPerturbation;
 			uniform float _FlakesPerturbation2;
+			uniform sampler2D _AmbientOcclusionMap;
 		
 			uniform mat4 _Object2World;
 			uniform mat4 _World2Object;
@@ -171,10 +175,13 @@
 					specular = pow (max (0.0, dot (reflect (-lightDirection, normalDirection), viewDirection)), _SpecularPower);
 				}
 
+				// Sample ambient occlusion map
+				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+
 				// Calculate base color
 				vec4 color;
 				color = _AmbientColor;
-				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse;
+				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
 				color += attenuation * _LightColor0 * _SpecularColor * specular;
 				
 				// Look up environment map value in cube map
@@ -229,6 +236,7 @@
 			uniform float _FlakesPerturbation1;
 			uniform float _NormalPerturbation;
 			uniform float _FlakesPerturbation2;
+			uniform sampler2D _AmbientOcclusionMap;
 		
 			uniform mat4 _Object2World;
 			uniform mat4 _World2Object;
@@ -339,10 +347,13 @@
 					specular = pow (max (0.0, dot (reflect (-lightDirection, normalDirection), viewDirection)), _SpecularPower);
 				}
 
+				// Sample ambient occlusion map
+				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+
 				// Calculate base color
 				vec4 color;
 				color = _AmbientColor;
-				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse;
+				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
 				color += attenuation * _LightColor0 * _SpecularColor * specular;
 				
 				// Look up environment map value in cube map
