@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: r_glass
-  m_Shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 8a6b83a0ebfbb417e97031d70dd89b23, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -20,9 +20,66 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+      data:
+        first:
+          name: _EnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 09be4d436c3cc4c189207beb841bd657, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _NormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AmbientOcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _SpecularPower
+        second: 10.2857141
+      data:
+        first:
+          name: _MixRatio
+        second: 1
+      data:
+        first:
+          name: _FresnelScale
+        second: .267857134
+      data:
+        first:
+          name: _FresnelExponent
+        second: 5
+      data:
+        first:
+          name: _Brightness
+        second: 5
+      data:
+        first:
+          name: _Transparency
+        second: .657142878
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: .278431386, g: .0588235334, b: .0588235334, a: .850000024}
+      data:
+        first:
+          name: _DiffuseColor
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 1, g: .772058845, b: .772058845, a: 1}
+      data:
+        first:
+          name: _AmbientColor
+        second: {r: .58431375, g: .039062757, b: 0, a: 0}

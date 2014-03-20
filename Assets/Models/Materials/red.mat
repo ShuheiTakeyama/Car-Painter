@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: red
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 874f305278a24426d9e336bfad0037a4, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -20,9 +20,97 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+      data:
+        first:
+          name: _EnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 09be4d436c3cc4c189207beb841bd657, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _NormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FlakesNormalMap
+        second:
+          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
+          m_Scale: {x: 20, y: 20}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AmbientOcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _SpecularPower
+        second: 16
+      data:
+        first:
+          name: _MixRatio
+        second: 1
+      data:
+        first:
+          name: _FresnelScale
+        second: .100000001
+      data:
+        first:
+          name: _FresnelExponent
+        second: 5
+      data:
+        first:
+          name: _FlakesPerturbation1
+        second: .217857137
+      data:
+        first:
+          name: _NormalPerturbation
+        second: 1
+      data:
+        first:
+          name: _FlakesPerturbation2
+        second: 1
+      data:
+        first:
+          name: _Brightness
+        second: 1.53571427
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: .435294151, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _DiffuseColor
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _AmbientColor
+        second: {r: .294117659, g: .0196624622, b: 0, a: 0}
+      data:
+        first:
+          name: _PaintColor1
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _PaintColor2
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _PaintColor3
+        second: {r: 1, g: .517241359, b: 0, a: 1}
+      data:
+        first:
+          name: _FlakesColor
+        second: {r: .220588207, g: .220588207, b: .220588207, a: 1}

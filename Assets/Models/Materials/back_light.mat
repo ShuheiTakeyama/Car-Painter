@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: glass
+  m_Name: back_light
   m_Shader: {fileID: 4800000, guid: 8a6b83a0ebfbb417e97031d70dd89b23, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -45,7 +45,7 @@ Material:
       data:
         first:
           name: _SpecularPower
-        second: 19.4285717
+        second: 16
       data:
         first:
           name: _MixRatio
@@ -53,7 +53,7 @@ Material:
       data:
         first:
           name: _FresnelScale
-        second: .278571427
+        second: .260714293
       data:
         first:
           name: _FresnelExponent
@@ -65,21 +65,21 @@ Material:
       data:
         first:
           name: _Transparency
-        second: .339285702
+        second: 1
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .749019623, g: .823529482, b: .917647123, a: .700000048}
+        second: {r: 1, g: 0, b: 0, a: 1}
       data:
         first:
           name: _DiffuseColor
-        second: {r: .242647052, g: .242647052, b: .242647052, a: 1}
+        second: {r: 1, g: 0, b: 0, a: 1}
       data:
         first:
           name: _SpecularColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: .703588367, b: .682352901, a: 1}
       data:
         first:
           name: _AmbientColor
-        second: {r: .25, g: .25, b: .25, a: 0}
+        second: {r: .784313738, g: .05243323, b: 0, a: 1}
