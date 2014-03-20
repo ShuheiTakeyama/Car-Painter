@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Body
+  m_Name: body
   m_Shader: {fileID: 4800000, guid: 874f305278a24426d9e336bfad0037a4, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -68,11 +68,11 @@ Material:
       data:
         first:
           name: _FlakesPerturbation1
-        second: .5
+        second: .339285702
       data:
         first:
           name: _NormalPerturbation
-        second: .892857134
+        second: .946428537
       data:
         first:
           name: _FlakesPerturbation2
@@ -93,7 +93,7 @@ Material:
       data:
         first:
           name: _DiffuseColor
-        second: {r: .389705896, g: .389705896, b: .389705896, a: 1}
+        second: {r: .568627477, g: .568627477, b: .568627477, a: 1}
       data:
         first:
           name: _SpecularColor
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _PaintColor2
-        second: {r: 1, g: .0588235296, b: 0, a: 1}
+        second: {r: 1, g: .434482753, b: 0, a: 1}
       data:
         first:
           name: _PaintColor3
