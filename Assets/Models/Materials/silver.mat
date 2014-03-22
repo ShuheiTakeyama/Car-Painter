@@ -24,7 +24,7 @@ Material:
         first:
           name: _EnvironmentMap
         second:
-          m_Texture: {fileID: 8900000, guid: 09be4d436c3cc4c189207beb841bd657, type: 2}
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -48,6 +48,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DiffuseEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: f948b94b64f2449b8b2e442570dcbad5, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -64,7 +71,7 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: 4.10732126
+        second: .268803418
       data:
         first:
           name: _FlakesPerturbation1
@@ -80,6 +87,14 @@ Material:
       data:
         first:
           name: _Brightness
+        second: 1
+      data:
+        first:
+          name: _DiffusePercent
+        second: 1
+      data:
+        first:
+          name: _SpecularPercent
         second: 1
     m_Colors:
       data:
@@ -97,7 +112,7 @@ Material:
       data:
         first:
           name: _AmbientColor
-        second: {r: .0117647061, g: .0117647061, b: .0117647061, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _PaintColor1
@@ -105,11 +120,11 @@ Material:
       data:
         first:
           name: _PaintColor2
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .278431386, g: .278431386, b: .278431386, a: 1}
       data:
         first:
           name: _PaintColor3
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .278431386, g: .278431386, b: .278431386, a: 1}
       data:
         first:
           name: _FlakesColor

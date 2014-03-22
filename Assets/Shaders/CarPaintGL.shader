@@ -30,7 +30,12 @@
 		_FlakesPerturbation2 ("Flakes Perturbation 2", Range (0.0, 1.0)) = 1.0
 		
 		// Add for ambient occlusion
-		_AmbientOcclusionMap ("Ambient Occlusion Map", 2D) = "white" {}		
+		_AmbientOcclusionMap ("Ambient Occlusion Map", 2D) = "white" {}
+		
+		// Add for image based lighting
+		_DiffuseEnvironmentMap ("Diffuse Environment Map", CUBE) = "" {}
+		_DiffusePercent ("Diffuse Percent", Range (0.0, 1.0)) = 1.0
+		_SpecularPercent ("Specular Percent", Range (0.0, 1.0)) = 1.0
 	}
 	
 	SubShader 
@@ -65,7 +70,10 @@
 			uniform float _NormalPerturbation;
 			uniform float _FlakesPerturbation2;
 			uniform sampler2D _AmbientOcclusionMap;
-		
+			uniform samplerCube _DiffuseEnvironmentMap;
+			uniform float _DiffusePercent;
+			uniform float _SpecularPercent;
+			
 			uniform mat4 _Object2World;
 			uniform mat4 _World2Object;
 			uniform vec3 _WorldSpaceCameraPos;
@@ -168,6 +176,19 @@
 				// Calculate diffuse
 				float diffuse = max (0.0, dot (normalDirection, lightDirection));
 
+				// Sampler diffuse environment map
+				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
+				vec4 environmentColor = textureCube (_DiffuseEnvironmentMap, reflectedDirection);
+				
+				// Sample ambient occlusion map
+				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+
+				// Final diffuse color
+				vec4 diffuseColor = attenuation * _LightColor0 * _DiffuseColor * diffuse;
+				diffuseColor += paintColor;
+				diffuseColor = mix (diffuseColor, diffuseColor * environmentColor, _DiffusePercent);
+				diffuseColor *= accessibility;
+
 				// Calculate specular
 				float specular = 0.0;
 				if (diffuse > 0.0)
@@ -175,27 +196,31 @@
 					specular = pow (max (0.0, dot (reflect (-lightDirection, normalDirection), viewDirection)), _SpecularPower);
 				}
 
-				// Sample ambient occlusion map
-				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+				// Sampler specular environment map
+				reflectedDirection = reflect (-viewDirection, normalDirection);
+				environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
+//				environmentColor *= _Brightness;
+
+				// Final specular color
+				vec4 specularColor = attenuation * _LightColor0 * _SpecularColor * specular;
+				specularColor += environmentColor;
+
+				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
+			    float fresnelMin = _FresnelScale * _SpecularPercent;
+			    float fresnelCos = dot (viewDirection, normalDirection);
+			    float mixRatioOnFresnel = fresnelMin + (_SpecularPercent - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
 
 				// Calculate base color
 				vec4 color;
-				color = _AmbientColor;
-				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
-				color += attenuation * _LightColor0 * _SpecularColor * specular;
+				color = _AmbientColor + mix (diffuseColor, diffuseColor + specularColor, mixRatioOnFresnel);
 				
-				// Look up environment map value in cube map
-				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
-				vec4 environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
-				environmentColor *= _Brightness;
+//				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
+//				color += attenuation * _LightColor0 * _SpecularColor * specular;
+				
 
-				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
-			    float fresnelMin = _FresnelScale * _MixRatio;
-			    float fresnelCos = dot (viewDirection, normalDirection);
-			    float mixRatioOnFresnel = fresnelMin + (_MixRatio - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
 			    
 				// Mix!
-				color = mix (color, environmentColor, mixRatioOnFresnel);
+//				color = mix (color, environmentColor + color, mixRatioOnFresnel);
 				
 				gl_FragColor = color;
 			}
@@ -237,7 +262,10 @@
 			uniform float _NormalPerturbation;
 			uniform float _FlakesPerturbation2;
 			uniform sampler2D _AmbientOcclusionMap;
-		
+			uniform samplerCube _DiffuseEnvironmentMap;
+			uniform float _DiffusePercent;
+			uniform float _SpecularPercent;
+			
 			uniform mat4 _Object2World;
 			uniform mat4 _World2Object;
 			uniform vec3 _WorldSpaceCameraPos;
@@ -340,6 +368,19 @@
 				// Calculate diffuse
 				float diffuse = max (0.0, dot (normalDirection, lightDirection));
 
+				// Sampler diffuse environment map
+				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
+				vec4 environmentColor = textureCube (_DiffuseEnvironmentMap, reflectedDirection);
+				
+				// Sample ambient occlusion map
+				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+
+				// Final diffuse color
+				vec4 diffuseColor = attenuation * _LightColor0 * _DiffuseColor * diffuse;
+				diffuseColor += paintColor;
+				diffuseColor = mix (diffuseColor, diffuseColor * environmentColor, _DiffusePercent);
+				diffuseColor *= accessibility;
+
 				// Calculate specular
 				float specular = 0.0;
 				if (diffuse > 0.0)
@@ -347,27 +388,31 @@
 					specular = pow (max (0.0, dot (reflect (-lightDirection, normalDirection), viewDirection)), _SpecularPower);
 				}
 
-				// Sample ambient occlusion map
-				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw).r;
+				// Sampler specular environment map
+				reflectedDirection = reflect (-viewDirection, normalDirection);
+				environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
+//				environmentColor *= _Brightness;
+
+				// Final specular color
+				vec4 specularColor = attenuation * _LightColor0 * _SpecularColor * specular;
+				specularColor += environmentColor;
+
+				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
+			    float fresnelMin = _FresnelScale * _SpecularPercent;
+			    float fresnelCos = dot (viewDirection, normalDirection);
+			    float mixRatioOnFresnel = fresnelMin + (_SpecularPercent - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
 
 				// Calculate base color
 				vec4 color;
-				color = _AmbientColor;
-				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
-				color += attenuation * _LightColor0 * _SpecularColor * specular;
+				color = _AmbientColor + mix (diffuseColor, diffuseColor + specularColor, mixRatioOnFresnel);
 				
-				// Look up environment map value in cube map
-				vec3 reflectedDirection = reflect (-viewDirection, normalDirection);
-				vec4 environmentColor = textureCube (_EnvironmentMap, reflectedDirection);
-				environmentColor *= _Brightness;
+//				color += attenuation * _LightColor0 * _DiffuseColor * paintColor * diffuse * accessibility;
+//				color += attenuation * _LightColor0 * _SpecularColor * specular;
+				
 
-				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
-			    float fresnelMin = _FresnelScale * _MixRatio;
-			    float fresnelCos = dot (viewDirection, normalDirection);
-			    float mixRatioOnFresnel = fresnelMin + (_MixRatio - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
 			    
 				// Mix!
-				color = mix (color, environmentColor, mixRatioOnFresnel);
+//				color = mix (color, environmentColor + color, mixRatioOnFresnel);
 				
 				gl_FragColor = color;
 			}

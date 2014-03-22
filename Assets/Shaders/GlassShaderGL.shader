@@ -28,6 +28,11 @@
 	
 	SubShader 
 	{
+		Tags
+		{
+			"Queue" = "Transparent"
+		}
+			
 		Pass
 		{
 			Tags

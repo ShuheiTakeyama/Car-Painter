@@ -24,7 +24,7 @@ Material:
         first:
           name: _EnvironmentMap
         second:
-          m_Texture: {fileID: 8900000, guid: 09be4d436c3cc4c189207beb841bd657, type: 2}
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
