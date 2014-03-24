@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: gum_17
+  m_Shader: {fileID: 4800000, guid: 874f305278a24426d9e336bfad0037a4, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
+          m_Scale: {x: 20, y: 20}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _NormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FlakesNormalMap
+        second:
+          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AmbientOcclusionMap
+        second:
+          m_Texture: {fileID: 2800000, guid: ea135532280b64e54a3ee696caed6058, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DiffuseEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: f948b94b64f2449b8b2e442570dcbad5, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecularEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _SpecularPower
+        second: 5.71428585
+      data:
+        first:
+          name: _MixRatio
+        second: .0535714328
+      data:
+        first:
+          name: _FresnelScale
+        second: 0
+      data:
+        first:
+          name: _FresnelExponent
+        second: 4.6429286
+      data:
+        first:
+          name: _FlakesPerturbation1
+        second: .235714301
+      data:
+        first:
+          name: _NormalPerturbation
+        second: .803571463
+      data:
+        first:
+          name: _FlakesPerturbation2
+        second: 1
+      data:
+        first:
+          name: _Brightness
+        second: 1
+      data:
+        first:
+          name: _DiffusePercent
+        second: 1
+      data:
+        first:
+          name: _SpecularPercent
+        second: .25
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: .113725498, g: .113725498, b: .113725498, a: 1}
+      data:
+        first:
+          name: _DiffuseColor
+        second: {r: .0367646813, g: .0367646813, b: .0367646813, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: .264705896, g: .264705896, b: .264705896, a: 1}
+      data:
+        first:
+          name: _AmbientColor
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _PaintColor1
+        second: {r: .117647059, g: .117647059, b: .117647059, a: 1}
+      data:
+        first:
+          name: _PaintColor2
+        second: {r: .117647059, g: .117647059, b: .117647059, a: 1}
+      data:
+        first:
+          name: _PaintColor3
+        second: {r: .161764681, g: .161764681, b: .161764681, a: 1}
+      data:
+        first:
+          name: _FlakesColor
+        second: {r: .0588235259, g: .0588235259, b: .0588235259, a: 1}

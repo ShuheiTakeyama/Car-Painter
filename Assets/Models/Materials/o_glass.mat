@@ -41,6 +41,20 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DiffuseEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: f948b94b64f2449b8b2e442570dcbad5, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecularEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -53,19 +67,31 @@ Material:
       data:
         first:
           name: _FresnelScale
-        second: .089285709
+        second: 0
       data:
         first:
           name: _FresnelExponent
-        second: 1.78635716
+        second: .00100000005
       data:
         first:
           name: _Brightness
-        second: 3.83928585
+        second: 2
       data:
         first:
           name: _Transparency
-        second: .800000012
+        second: 1
+      data:
+        first:
+          name: _DiffusePercent
+        second: 1
+      data:
+        first:
+          name: _SpecularPercent
+        second: 1
+      data:
+        first:
+          name: _Contrast
+        second: 1.03571427
     m_Colors:
       data:
         first:
@@ -83,3 +109,11 @@ Material:
         first:
           name: _AmbientColor
         second: {r: .58431375, g: .185548097, b: 0, a: 0}
+      data:
+        first:
+          name: _AverageLuminance
+        second: {r: .5, g: .5, b: .5, a: 1}
+      data:
+        first:
+          name: _BaseColor
+        second: {r: .784313738, g: .563657224, b: 0, a: 1}

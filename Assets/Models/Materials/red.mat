@@ -38,7 +38,7 @@ Material:
         first:
           name: _FlakesNormalMap
         second:
-          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
+          m_Texture: {fileID: 2800000, guid: 149caf300598c4abda114f8f5c39d21b, type: 3}
           m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
@@ -46,6 +46,20 @@ Material:
           name: _AmbientOcclusionMap
         second:
           m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DiffuseEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecularEnvironmentMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -60,11 +74,11 @@ Material:
       data:
         first:
           name: _FresnelScale
-        second: .100000001
+        second: 0
       data:
         first:
           name: _FresnelExponent
-        second: 5
+        second: .447339296
       data:
         first:
           name: _FlakesPerturbation1
@@ -76,11 +90,23 @@ Material:
       data:
         first:
           name: _FlakesPerturbation2
-        second: 1
+        second: .696428597
       data:
         first:
           name: _Brightness
-        second: 1.53571427
+        second: 1.03571427
+      data:
+        first:
+          name: _DiffusePercent
+        second: 1
+      data:
+        first:
+          name: _SpecularPercent
+        second: 1
+      data:
+        first:
+          name: _Contrast
+        second: 1
     m_Colors:
       data:
         first:
@@ -109,8 +135,12 @@ Material:
       data:
         first:
           name: _PaintColor3
-        second: {r: 1, g: .517241359, b: 0, a: 1}
+        second: {r: 1, g: .267409474, b: 0, a: 1}
       data:
         first:
           name: _FlakesColor
-        second: {r: .220588207, g: .220588207, b: .220588207, a: 1}
+        second: {r: .102941155, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _AverageLuminance
+        second: {r: .5, g: .5, b: .5, a: 1}
