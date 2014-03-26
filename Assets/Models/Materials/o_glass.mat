@@ -31,8 +31,8 @@ Material:
         first:
           name: _NormalMap
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
+          m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -55,6 +55,20 @@ Material:
           m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _RefractionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectionMap
+        second:
+          m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -71,15 +85,11 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: .00100000005
+        second: .179535702
       data:
         first:
           name: _Brightness
         second: 2
-      data:
-        first:
-          name: _Transparency
-        second: 1
       data:
         first:
           name: _DiffusePercent
@@ -90,8 +100,16 @@ Material:
         second: 1
       data:
         first:
+          name: _Transparency
+        second: 1
+      data:
+        first:
           name: _Contrast
         second: 1.03571427
+      data:
+        first:
+          name: _Reflectivity
+        second: 1
     m_Colors:
       data:
         first:
@@ -116,4 +134,8 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: .784313738, g: .563657224, b: 0, a: 1}
+        second: {r: 1, g: .718662977, b: 0, a: 1}
+      data:
+        first:
+          name: _Scale
+        second: {r: .119999997, g: .0500000007, b: 0, a: 0}
