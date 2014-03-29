@@ -11,31 +11,27 @@
 		_FlakesPerturbation1 ("Flakes Perturbation 1", Range (0.0, 1.0)) = 0.2
 		_NormalPerturbation ("Normal Perturbation", Range (0.0, 1.0)) = 1.0
 		_FlakesPerturbation2 ("Flakes Perturbation 2", Range (0.0, 1.0)) = 1.0
-
 		_DiffuseEnvironmentMap ("Diffuse Environment Map", CUBE) = "" {}
 		_DiffusePercent ("Diffuse Percent", Range (0.0, 1.0)) = 1.0
 		_SpecularEnvironmentMap ("Specular Environment Map", CUBE) = "" {}
 		_SpecularPercent ("Specular Percent", Range (0.0, 1.0)) = 1.0
-
 		_FresnelScale ("Fresnel Scale", Range (0.0, 1.0)) = 0.1
 		_FresnelExponent ("Fresnel Exponent", Range (0.001, 5.0)) = 5.0
-
 		_Brightness ("Brightness", Range (0.0, 2.0)) = 1.0
 		_AverageLuminance ("Average Luminance", Color) = (0.5, 0.5, 0.5, 1.0)
 		_Contrast ("Contrast", Range (0.0, 2.0)) = 1.0
-		
 		_AmbientOcclusionMap ("Ambient Occlusion Map", 2D) = "white" {}
 	}
 	
 	SubShader 
 	{
+		Tags
+		{
+			"Queue" = "Geometry"
+		}
+
 		Pass
 		{
-			Tags
-			{
-				"LightMode" = "ForwardBase"
-			}
-			
 			GLSLPROGRAM
 
 			uniform vec4 _PaintColor1;
@@ -49,19 +45,15 @@
 			uniform float _FlakesPerturbation1;
 			uniform float _NormalPerturbation;
 			uniform float _FlakesPerturbation2;
-
 			uniform samplerCube _DiffuseEnvironmentMap;
 			uniform float _DiffusePercent;
 			uniform samplerCube _SpecularEnvironmentMap;
 			uniform float _SpecularPercent;
-
 			uniform float _FresnelScale;
 			uniform float _FresnelExponent;
-			
 			uniform float _Brightness;
 			uniform vec4 _AverageLuminance;
 			uniform float _Contrast;
-
 			uniform sampler2D _AmbientOcclusionMap;
 			
 			uniform mat4 _Object2World;
@@ -110,31 +102,31 @@
 				vec4 encodedNormal;
 				
 				encodedNormal = texture2D (_NormalMap, gl_TexCoord[0].xy * _NormalMap_ST.xy + _NormalMap_ST.zw);
-				vec3 normalDirection = vec3 (2.0 * encodedNormal.ag - vec2 (1.0), 0.0);
-				normalDirection.z = sqrt (1.0 - dot (normalDirection, normalDirection));
+//				vec3 normalDirection = vec3 (2.0 * encodedNormal.ag - vec2 (1.0), 0.0);
+//				normalDirection.z = sqrt (1.0 - clamp (dot (normalDirection, normalDirection), 0.0, 1.0));
+//				normalDirection = normalize (localSurface2World * normalDirection);
+				vec3 normalDirection = 2.0 * encodedNormal.rgb - 1.0;
 				normalDirection = normalize (localSurface2World * normalDirection);
 				
 				encodedNormal = texture2D (_FlakesNormalMap, gl_TexCoord[0].xy * _FlakesNormalMap_ST.xy + _FlakesNormalMap_ST.zw);
-				vec3 flakesNormalDirection = vec3 (2.0 * encodedNormal.ag - vec2 (1.0), 0.0);
-				flakesNormalDirection.z = sqrt (1.0 - dot (flakesNormalDirection, flakesNormalDirection));
+//				vec3 flakesNormalDirection = vec3 (2.0 * encodedNormal.ag - vec2 (1.0), 0.0);
+//				flakesNormalDirection.z = sqrt (1.0 - clamp (dot (flakesNormalDirection, flakesNormalDirection), 0.0, 1.0));
+//				flakesNormalDirection = normalize (localSurface2World * flakesNormalDirection);
+				vec3 flakesNormalDirection = 2.0 * encodedNormal.rgb - 1.0;
 				flakesNormalDirection = normalize (localSurface2World * flakesNormalDirection);
 				
 				// Compute surface and subsurface normal
 				vec3 surfaceNormal = _FlakesPerturbation1 * flakesNormalDirection + _NormalPerturbation * normalDirection;
 				vec3 subsurfaceNormal = _FlakesPerturbation2 * (flakesNormalDirection + normalDirection);
 
-				// Get view direction
+				// Paint color
 				vec3 viewDirection = normalize (_WorldSpaceCameraPos - vec3 (WorldSpacePosition));
-				
-				// Compute surface and subsurface fresnel
 				float surfaceFresnel = clamp ((dot (surfaceNormal, viewDirection)), 0.0, 1.0);
 				float subsurfaceFresnel = clamp ((dot (subsurfaceNormal, viewDirection)), 0.0, 1.0);
-
-				// Calculate paint color
 				float surfaceFresnelSq = surfaceFresnel * surfaceFresnel;
 				
 				vec4 paintColor;
-				paintColor += _PaintColor1 * surfaceFresnel;
+				paintColor = _PaintColor1 * surfaceFresnel;
 				paintColor += _PaintColor2 * surfaceFresnelSq;
 				paintColor += _PaintColor3 * surfaceFresnelSq * surfaceFresnelSq;
 				paintColor += _FlakesColor * pow (subsurfaceFresnel, 16.0);
@@ -148,22 +140,21 @@
 				vec4 specularEnvironmentColor = textureCube (_SpecularEnvironmentMap, reflectedDirection);
 				specularEnvironmentColor *= _Brightness;
 				specularEnvironmentColor = mix (_AverageLuminance, specularEnvironmentColor, _Contrast);
-				
-				// "Fresnel" attenuates strength of reflection (According to Fresnel's law)
-			    float fresnelMin = _FresnelScale * _SpecularPercent;
-			    float fresnelCos = dot (viewDirection, normalDirection);
-			    float mixRatioOnFresnel = fresnelMin + (_SpecularPercent - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
-				
+
 				// Sample ambient occlusion map
 				float accessibility = texture2D (_AmbientOcclusionMap, gl_TexCoord[0].xy).a;
-
-				// Final color
-				vec4 color;
-				color = mix (paintColor, paintColor * diffuseEnvironmentColor, _DiffusePercent);
-				color *= accessibility;
-				color = mix (color, color + specularEnvironmentColor, mixRatioOnFresnel);
 				
-				gl_FragColor = color;
+				// Final color
+			    float fresnelMin = _FresnelScale * _SpecularPercent;
+			    float fresnelCos = dot (viewDirection, normalDirection);
+			    float _SpecularPercentOnFresnel = fresnelMin + (_SpecularPercent - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
+
+				vec4 finalColor;
+				finalColor = mix (paintColor, paintColor * diffuseEnvironmentColor, _DiffusePercent);
+				finalColor *= accessibility;
+				finalColor = mix (finalColor, finalColor + specularEnvironmentColor, _SpecularPercentOnFresnel);
+				
+				gl_FragColor = finalColor;
 			}
 			
 			#endif

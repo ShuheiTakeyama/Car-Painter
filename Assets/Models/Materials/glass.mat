@@ -31,7 +31,7 @@ Material:
         first:
           name: _NormalMap
         second:
-          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
@@ -85,7 +85,7 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: .179535702
+        second: .447339296
       data:
         first:
           name: _Brightness
@@ -93,11 +93,11 @@ Material:
       data:
         first:
           name: _DiffusePercent
-        second: 1
+        second: .303571433
       data:
         first:
           name: _SpecularPercent
-        second: 1
+        second: .785714269
       data:
         first:
           name: _Transparency
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _Reflectivity
-        second: 1
+        second: .892857134
     m_Colors:
       data:
         first:

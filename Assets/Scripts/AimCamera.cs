@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AimCamera : MonoBehaviour {
+public class AimCamera : MonoBehaviour 
+{
 	public Transform target;
 	Vector3 f0Dir= Vector3.zero;
 	Vector3 upVal= Vector3.zero;

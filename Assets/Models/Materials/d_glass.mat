@@ -31,15 +31,8 @@ Material:
         first:
           name: _NormalMap
         second:
-          m_Texture: {fileID: 2800000, guid: d044c4c0736ac4425b9f3127120cd73c, type: 3}
-          m_Scale: {x: 20, y: 20}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _FlakesNormalMap
-        second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -76,6 +69,13 @@ Material:
           m_Texture: {fileID: 8900000, guid: 37f3c625689114a8794bbc27672af4b9, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FlakesNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -92,23 +92,11 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: .893678546
-      data:
-        first:
-          name: _FlakesPerturbation1
-        second: .200000003
-      data:
-        first:
-          name: _NormalPerturbation
-        second: 1
-      data:
-        first:
-          name: _FlakesPerturbation2
-        second: 1
+        second: 1.51855361
       data:
         first:
           name: _Brightness
-        second: 2
+        second: 1.32142854
       data:
         first:
           name: _DiffusePercent
@@ -124,10 +112,22 @@ Material:
       data:
         first:
           name: _Contrast
-        second: 1
+        second: 1.17857146
       data:
         first:
           name: _Reflectivity
+        second: .892857134
+      data:
+        first:
+          name: _FlakesPerturbation1
+        second: .200000003
+      data:
+        first:
+          name: _NormalPerturbation
+        second: 1
+      data:
+        first:
+          name: _FlakesPerturbation2
         second: 1
     m_Colors:
       data:
@@ -148,6 +148,18 @@ Material:
         second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
+          name: _AverageLuminance
+        second: {r: .5, g: .5, b: .5, a: 1}
+      data:
+        first:
+          name: _BaseColor
+        second: {r: .510265291, g: .538286269, b: .619607866, a: 1}
+      data:
+        first:
+          name: _Scale
+        second: {r: .00999999978, g: .00999999978, b: 0, a: 0}
+      data:
+        first:
           name: _PaintColor1
         second: {r: 0, g: 0, b: 0, a: 0}
       data:
@@ -162,15 +174,3 @@ Material:
         first:
           name: _FlakesColor
         second: {r: 0, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: _AverageLuminance
-        second: {r: .5, g: .5, b: .5, a: 1}
-      data:
-        first:
-          name: _BaseColor
-        second: {r: .510265291, g: .538286269, b: .619607866, a: 1}
-      data:
-        first:
-          name: _Scale
-        second: {r: .00999999978, g: .00999999978, b: 0, a: 0}

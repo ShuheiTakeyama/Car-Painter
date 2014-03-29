@@ -85,19 +85,19 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: .179535702
+        second: .179535717
       data:
         first:
           name: _Brightness
-        second: 2
+        second: 1.46428573
       data:
         first:
           name: _DiffusePercent
-        second: 1
+        second: .214285716
       data:
         first:
           name: _SpecularPercent
-        second: 1
+        second: .785714269
       data:
         first:
           name: _Transparency
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _Reflectivity
-        second: 1
+        second: .375
     m_Colors:
       data:
         first:
@@ -134,7 +134,7 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: 1, g: .718662977, b: 0, a: 1}
+        second: {r: .686274529, g: .493200094, b: 0, a: 1}
       data:
         first:
           name: _Scale

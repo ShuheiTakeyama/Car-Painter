@@ -7,13 +7,13 @@
 	
 	SubShader 
 	{
-		Pass
+		Tags
 		{
-			Tags
-			{
-				"Queue" = "Background"
-			}
+			"Queue" = "Background"
+		}
 			
+		Pass
+		{			
 			ZWrite Off
 			Cull Front
 			

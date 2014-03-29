@@ -127,15 +127,15 @@ Material:
       data:
         first:
           name: _PaintColor1
-        second: {r: 1, g: 0, b: 0, a: 1}
+        second: {r: .70588237, g: 0, b: 0, a: 1}
       data:
         first:
           name: _PaintColor2
-        second: {r: 1, g: 0, b: 0, a: 1}
+        second: {r: .70588237, g: 0, b: 0, a: 1}
       data:
         first:
           name: _PaintColor3
-        second: {r: 1, g: .267409474, b: 0, a: 1}
+        second: {r: .70588237, g: .18875964, b: 0, a: 1}
       data:
         first:
           name: _FlakesColor
