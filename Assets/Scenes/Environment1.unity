@@ -4261,7 +4261,7 @@ GameObject:
   - 23: {fileID: 1005722978}
   - 95: {fileID: 1005722977}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4970,8 +4970,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1005722980}
   - {fileID: 1607552437}
+  - {fileID: 1005722980}
   m_Father: {fileID: 0}
 --- !u!1001 &1201261840
 Prefab:
