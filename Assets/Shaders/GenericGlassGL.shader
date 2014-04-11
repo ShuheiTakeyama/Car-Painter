@@ -1,4 +1,4 @@
-﻿Shader "ShaderMan/GlassShaderGL" 
+﻿Shader "ShaderMan/GenericGlassGL" 
 {
 	Properties 
 	{
@@ -26,8 +26,6 @@
 			
 		Pass
 		{
-//			ZWrite Off
-			
 			GLSLPROGRAM
 
 			uniform vec4 _BaseColor;
@@ -118,7 +116,6 @@
 			    float fresnelCos = dot (viewDirection, normalDirection);
 			    float _SpecularPercentOnFresnel = fresnelMin + (_SpecularPercent - fresnelMin) * pow((1.0 - abs(fresnelCos)), _FresnelExponent);
 
-//				gl_FragColor = _BaseColor * refractionColor * (1.0 - ratioOnFresnel) + reflectionColor * ratioOnFresnel;
 				vec4 finalColor;
 				finalColor = _BaseColor * refractionColor * (1.0 - _SpecularPercentOnFresnel);
 				finalColor = mix (finalColor, finalColor * diffuseEnvironmentColor, _DiffusePercent);

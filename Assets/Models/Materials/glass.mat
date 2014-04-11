@@ -85,19 +85,19 @@ Material:
       data:
         first:
           name: _FresnelExponent
-        second: .447339296
+        second: .179535717
       data:
         first:
           name: _Brightness
-        second: 1.42857146
+        second: 1.57142866
       data:
         first:
           name: _DiffusePercent
-        second: .303571433
+        second: .107142858
       data:
         first:
           name: _SpecularPercent
-        second: .785714269
+        second: .892857134
       data:
         first:
           name: _Transparency

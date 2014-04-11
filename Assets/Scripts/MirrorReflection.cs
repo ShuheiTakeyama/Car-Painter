@@ -4,44 +4,42 @@ using System.Collections;
 [ExecuteInEditMode]
 public class MirrorReflection : MonoBehaviour
 {
-	public int TextureSize = 256;
 	public float ClipPlaneOffset = 0.07f;
 
-	public LayerMask ReflectLayers = -1;
-
-	private Hashtable ReflectionCameras = new Hashtable ();
-
-	private RenderTexture ReflectionTexture = null;
-	private int OldReflectionTextureSize = 0;
-
-	private static bool InsideRendering = false;
-
+	private static Hashtable MirrorReflectionCameras = new Hashtable ();
+	private static bool IsRecursiveRendering = false;
+	
 	public void OnWillRenderObject ()
 	{
-		if (!enabled || !renderer || !renderer.sharedMaterial || !renderer.enabled)
+		// Safeguard from recursive rendering
+		if (IsRecursiveRendering)
 		{
 			return;
 		}
+		IsRecursiveRendering = true;
 
+		// Create new mirror reflection camera and render texture if nothing
 		Camera currentCamera = Camera.current;
-		if (!currentCamera)
+		Camera mirrorReflectionCamera = MirrorReflectionCameras[currentCamera] as Camera;
+		if (!mirrorReflectionCamera)
 		{
-			return;
+			RenderTexture mirrorReflectionTexture = new RenderTexture (512, 512, 16);
+			mirrorReflectionTexture.name = "__MirrorReflectionTexture";
+			mirrorReflectionTexture.antiAliasing = 8;
+			mirrorReflectionTexture.hideFlags = HideFlags.DontSave;
+			
+			GameObject newCamera = new GameObject("__MirrorReflectionCamera", typeof (Camera));
+			mirrorReflectionCamera = newCamera.camera;
+			mirrorReflectionCamera.enabled = false;
+			mirrorReflectionCamera.cullingMask = ~(16); // Never rendering TransparentFX and Waterlayer
+			mirrorReflectionCamera.targetTexture = mirrorReflectionTexture;
+			newCamera.hideFlags = HideFlags.HideAndDontSave;
+			
+			MirrorReflectionCameras[currentCamera] = mirrorReflectionCamera;
 		}
 
-		// Safeguard from recursive reflections
-		if (InsideRendering)
-		{
-			return;
-		}
-		InsideRendering = true;
-
-		// Create reflection camera and render texture
-		Camera reflectionCamera;
-		CreateMirrorObjects (currentCamera, out reflectionCamera);
-
-		// Update camera values to match current camera
-		UpdateCameraModes (currentCamera, reflectionCamera);
+		// Update mirror reflection camera parameters to be the same as current camera parameters
+		UpdateCameraParameters (mirrorReflectionCamera, currentCamera);
 
 		// Create reflection plane
 		Vector3 position = transform.position;
@@ -52,95 +50,58 @@ public class MirrorReflection : MonoBehaviour
 		// Create reflection matrix with reflection plane then update view matrix
 		Matrix4x4 reflectionMatrix = Matrix4x4.zero;
 		CalculateReflectionMatrix (ref reflectionMatrix, reflectionPlane);
-		reflectionCamera.worldToCameraMatrix = currentCamera.worldToCameraMatrix * reflectionMatrix;
+		mirrorReflectionCamera.worldToCameraMatrix = currentCamera.worldToCameraMatrix * reflectionMatrix;
 
 		// Update projection matrix
-		Vector4 clipPlane = CreateCameraSpacePlane (reflectionCamera, position, normal, 1.0f);
+		Vector4 clipPlane = CreateCameraSpacePlane (mirrorReflectionCamera, position, normal, 1.0f);
 		Matrix4x4 projectionMatrix = currentCamera.projectionMatrix;
 		CalculateObliqueMatrix (ref projectionMatrix, clipPlane);
-		reflectionCamera.projectionMatrix = projectionMatrix;
+		mirrorReflectionCamera.projectionMatrix = projectionMatrix;
 
 		// Render!
-		reflectionCamera.cullingMask = ~(1 << 4) & ReflectLayers.value; // Never render water layer
-		reflectionCamera.targetTexture = ReflectionTexture;
-		reflectionCamera.transform.position = currentCamera.transform.position; // Update same position to current camera
-		GL.SetRevertBackfacing (true);
-		reflectionCamera.Render ();
-		GL.SetRevertBackfacing (false);
+		if (mirrorReflectionCamera.transform.position != currentCamera.transform.position || mirrorReflectionCamera.transform.rotation != currentCamera.transform.rotation)
+		{
+			mirrorReflectionCamera.transform.position = currentCamera.transform.position;
+			mirrorReflectionCamera.transform.rotation = currentCamera.transform.rotation;
+			GL.SetRevertBackfacing (true);
+			mirrorReflectionCamera.Render ();
+			GL.SetRevertBackfacing (false);
+		}
 
 		// Set render texture to materials
 		Material[] materials = renderer.sharedMaterials;
 		foreach (Material material in materials)
 		{
-			if (material.HasProperty ("_ReflectionTex"))
+			if (material.HasProperty ("_MirrorReflectionMap"))
 			{
-				material.SetTexture ("_ReflectionTex", ReflectionTexture);
+				material.SetTexture ("_MirrorReflectionMap", mirrorReflectionCamera.targetTexture);
 			}
 		}
 
 		// Set projection matrix that transform UVs from object space to screen space to materials 
 		Matrix4x4 scaleOffsetMatrix = Matrix4x4.TRS (new Vector3 (0.5f, 0.5f, 0.5f), Quaternion.identity, new Vector3 (0.5f, 0.5f, 0.5f));
-		Matrix4x4 mirrorProjectioniMatrix = scaleOffsetMatrix * currentCamera.projectionMatrix * currentCamera.worldToCameraMatrix * transform.localToWorldMatrix;
+		Matrix4x4 mirrorProjectionMatrix = scaleOffsetMatrix * currentCamera.projectionMatrix * currentCamera.worldToCameraMatrix * transform.localToWorldMatrix;
 		foreach (Material material in materials)
 		{
-			material.SetMatrix ("_ProjMatrix", mirrorProjectioniMatrix);
+			material.SetMatrix ("_MirrorProjectionMatrix", mirrorProjectionMatrix);
 		}
 
-		InsideRendering = false;
+		IsRecursiveRendering = false;
 	}
-
+	
 	void OnDisable ()
 	{
-		if (ReflectionTexture)
-		{
-			DestroyImmediate (ReflectionTexture);
-			ReflectionTexture = null;
-		}
-		foreach (DictionaryEntry entry in ReflectionCameras)
+		foreach (DictionaryEntry entry in MirrorReflectionCameras)
 		{
 			DestroyImmediate (((Camera)entry.Value).gameObject);
 		}
-		ReflectionCameras.Clear ();
+		MirrorReflectionCameras.Clear ();
 	}
 
-	private void CreateMirrorObjects (Camera currentCamera, out Camera reflectionCamera)
-	{
-		reflectionCamera = null;
-
-		// Create reflection render texture
-		if (!ReflectionTexture || OldReflectionTextureSize != TextureSize)
-		{
-			if (ReflectionTexture)
-			{
-				DestroyImmediate (ReflectionTexture);
-			}
-
-			ReflectionTexture = new RenderTexture (TextureSize, TextureSize, 16);
-			ReflectionTexture.name = "__MirrorReflection" + GetInstanceID ();
-			ReflectionTexture.antiAliasing = 8;
-			ReflectionTexture.hideFlags = HideFlags.DontSave;
-			OldReflectionTextureSize = TextureSize;
-		}
-
-		// Create reflection camera
-		reflectionCamera = ReflectionCameras[currentCamera] as Camera;
-		if (!reflectionCamera)
-		{
-
-			GameObject newCamera = new GameObject("__MirrorReflectionCamera" + "(" + GetInstanceID () + ")" + "(" + currentCamera.GetInstanceID () + ")", typeof (Camera));
-			reflectionCamera = newCamera.camera;
-			reflectionCamera.enabled = false;
-			reflectionCamera.transform.position = transform.position;
-			reflectionCamera.transform.rotation = transform.rotation;
-			newCamera.hideFlags = HideFlags.HideAndDontSave;
-			ReflectionCameras[currentCamera] = reflectionCamera;
-		}
-	}
-
-	private void UpdateCameraModes (Camera source, Camera destination)
+	private void UpdateCameraParameters (Camera destination, Camera source)
 	{
 		destination.clearFlags = source.clearFlags;
-		destination.backgroundColor = Color.white; // Mask color
+		destination.backgroundColor = source.backgroundColor;
 		destination.farClipPlane = source.farClipPlane;
 		destination.nearClipPlane = source.nearClipPlane;
 		destination.orthographic = source.orthographic;
@@ -148,7 +109,7 @@ public class MirrorReflection : MonoBehaviour
 		destination.aspect = source.aspect;
 		destination.orthographicSize = source.orthographicSize;
 	}
-
+	
 	private static void CalculateReflectionMatrix (ref Matrix4x4 reflectionMatrix, Vector4 plane)
 	{
 		reflectionMatrix.m00 = (-2.0f * plane[0] * plane[0] + 1.0f);

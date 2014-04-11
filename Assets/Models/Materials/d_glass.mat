@@ -153,11 +153,11 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: .510265291, g: .538286269, b: .619607866, a: 1}
+        second: {r: .5661515, g: .579850614, b: .619607866, a: 1}
       data:
         first:
           name: _Scale
-        second: {r: .00999999978, g: .00999999978, b: 0, a: 0}
+        second: {r: .00100000005, g: .00999999978, b: 0, a: 0}
       data:
         first:
           name: _PaintColor1

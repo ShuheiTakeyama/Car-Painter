@@ -97,11 +97,11 @@ Material:
       data:
         first:
           name: _DiffusePercent
-        second: .214285716
+        second: .0714285746
       data:
         first:
           name: _SpecularPercent
-        second: .803571403
+        second: .625
       data:
         first:
           name: _Transparency
